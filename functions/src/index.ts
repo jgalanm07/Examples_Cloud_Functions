@@ -24,6 +24,10 @@ exports.writeStorage = functions.storage
     .object()
     .onFinalize(storageController.writeStorage)
 
+exports.resizeImageStorageFirestore = functions.storage
+    .object()
+    .onFinalize(storageController.resizeImage)
+
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
 //

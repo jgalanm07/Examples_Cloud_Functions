@@ -8,6 +8,13 @@ export class UserAdmin {
         .doc(uid)
         .set(entity)
     }
+    updateUser(data:any,uid:string){
+        return admin
+        .firestore()
+        .collection("user")
+        .doc(uid)
+        .update(data)
+    }
     deleteUser(uid:string){
         return admin
             .firestore()
