@@ -6,6 +6,7 @@ admin.initializeApp()
 const authController = require('./components/auth/AuthController')
 const userController = require('./components/user/UserController')
 const storageController = require('./components/storage/StorageController')
+const backupController = require('./components/backup/BackupController')
 
 exports.authCreate = functions.auth
     .user()
@@ -27,6 +28,13 @@ exports.writeStorage = functions.storage
 exports.resizeImageStorageFirestore = functions.storage
     .object()
     .onFinalize(storageController.resizeImage)
+
+
+//exports.backupToStorage = functions.https.onRequest(backupController.backupToStorage)
+
+exports.backupToStorage = functions.pubsub.schedule("49 11 7 8 *")
+    .timeZone("America/Bogota")
+    .onRun(backupController.backupToStorage)
 
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
